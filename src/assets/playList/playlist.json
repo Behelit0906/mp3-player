@@ -1,22 +1,27 @@
 [
     {
         "title": "Like a stone",
-        "artist": "Audioslave"
+        "artist": "Audioslave",
+        "file": "like_a_stone.mp3"
     },
     {
       "title": "Hotel california",
-      "artist": "Eagles"
+      "artist": "Eagles",
+      "file": "Hotel_California.mp3"
     },
     {
         "title": "Cadillac solitario",
-        "artist": "Buitres"   
+        "artist": "Buitres",
+        "file": "cadillac_solitario.mp3" 
     },
     {
       "title": "Contrapunto para humano y computadora",
-      "artist": "Cuarteto de nos"
+      "artist": "Cuarteto de nos",
+      "file": "contrapunto_para_humano_y_computadora.mp3"
     },
     {
         "title": "When you were young",
-        "artist": "The killers"
+        "artist": "The killers",
+        "file": "When_You_Were_Young.mp3"
     } 
 ]
