@@ -16,8 +16,11 @@ body{
     border-bottom: 1px solid  #8685a2;
     white-space:nowrap;
     text-overflow: ellipsis;
+    cursor: pointer;
 
 }
+
+
 
 .main-container{
     position: relative;
@@ -25,16 +28,19 @@ body{
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    padding-top: 2%;
+    padding-top: 1.5%;
     
 }
 
 
 .play-list{
+    display: none;
+    overflow: auto;
     position: absolute;
-    top: 50px;
+    top: 45px;
     right: -303px;
     width: 300px;
+    height: 184px;
     padding: 2% 5%;
     font-size: 14px;
     font-weight: bold;
@@ -71,6 +77,7 @@ body{
     position: absolute;
     top: 20px;
     right: 5px;
+    cursor: pointer;
 }
 
 .cover{
@@ -118,14 +125,19 @@ body{
 /*  STATUS SECTION   */
 .status-box{
     display: flex;
-    
-    height: 60px;
+    flex-direction: column;
+    justify-content: center;
+    height: 75px;
     padding-left: 70px;
     padding-right: 70px;
     background-color: #c1b9d3;
     text-align: center;
     color: #411583;
     font-size: 14px;
+}
+
+.display{
+    display: block;
 }
 
 
