@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', async function(){
 
     /* CONTROL EVENTS */
     playEvent();
+    previousButton.addEventListener('click', previousSong);
+    nextButton.addEventListener('click', nextSong);
     
 });
 
@@ -86,7 +88,16 @@ function selectSong(li){
 function nextSong(){
     if(song < list.length -1){
         song++;
+        changeSong();
+        audio.play();
+    }
+}
 
+function previousSong(){
+    if(song > 0){
+        song--;
+        changeSong();
+        audio.play();
     }
 }
 
