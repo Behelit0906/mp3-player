@@ -1,4 +1,5 @@
-let list = '';
+var list = [];
+var listCopy = [];
 const audio = document.querySelector('audio');
 const jsmediatags = window.jsmediatags;
 const previousButton = document.querySelector('#previous');
@@ -7,11 +8,19 @@ const nextButton = document.querySelector('#next');
 const playListContainer = document.querySelector('.play-list-container');
 const playList = document.querySelector('.playList');
 const playListButton = document.querySelector('.playlist-icon');
-let song = 0;
+const shuffleButton = document.querySelector('.shuffle');
+var song = 0;
+var isShuffle = false;
 
 
 document.addEventListener('DOMContentLoaded', async function(){
+    /* CARGO LA LISTA DE CANCIONES Y HAGO UNA COPIA */ 
     list = await load_playlist();
+    listCopy = list.map((item) => {
+        return item;
+    });
+
+    /*  SELECCIONO UNA CANCIÓN DE FORMA ALEATORIA PARA EMPEZAR  */
     song = Math.floor(Math.random()*list.length);
 
 
@@ -32,6 +41,11 @@ document.addEventListener('DOMContentLoaded', async function(){
     playEvent();
     previousButton.addEventListener('click', previousSong);
     nextButton.addEventListener('click', nextSong);
+
+    shuffleButton.addEventListener('click', () => {
+        shuffleButton.classList.toggle('active');
+        shuffle();
+    });
     
 });
 
@@ -44,6 +58,7 @@ async function load_playlist(){
 
 function loadPlayList(){
     let count = 1;
+    playList.innerHTML = '';
     list.forEach(element => {
         const li = document.createElement('li');
         li.setAttribute('class','list-item');
@@ -99,6 +114,25 @@ function previousSong(){
         changeSong();
         audio.play();
     }
+}
+
+function shuffle(){
+    if(!isShuffle){
+        list.sort(function() {return Math.random() - 0.5});
+        isShuffle = true;   
+    }
+    else{
+        list = listCopy.map((item) => {
+            return item;
+        });
+        isShuffle = false;
+    }
+    loadPlayList();
+    song = 0;
+}
+
+function loadSongData(){
+    
 }
 
 

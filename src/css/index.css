@@ -90,6 +90,7 @@ body{
 /*  CONTROLS SECTION   */
 
 .controls-box{
+    position: relative;
     overflow: hidden;
     height: 150px;
     background-color: white;
@@ -115,11 +116,26 @@ body{
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+
 }
 
 .control-icon{
     width: 20%;
     cursor: pointer;
+}
+
+.shuffle{
+    width: 7.5%;
+    position: absolute;
+    top: 90px;
+    right: 35px;
+    cursor: pointer;
+}
+
+
+
+.active{
+    filter: invert(11%) sepia(53%) saturate(4627%) hue-rotate(259deg) brightness(98%) contrast(104%);
 }
 
 
