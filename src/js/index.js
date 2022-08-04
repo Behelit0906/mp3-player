@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', async function(){
     
 
     /*  PREPARING SONG */
-    audio.setAttribute('src',`src/assets/songs/${list[song].file}`);
+    audio.setAttribute('src',`src/assets/songs/${list[song].fileName}`);
 
 
     /* CONTROL EVENTS */
-    play();
+    playEvent();
     
 });
 
@@ -54,7 +54,7 @@ function loadPlayList(){
 }
 
 
-function play(){
+function playEvent(){
     let root = 'src/assets/icons/';
     playButton.addEventListener('click', ()=>{
         if(audio.paused){
@@ -69,13 +69,25 @@ function play(){
 
 }
 
+function changeSong(){
+    route = `src/assets/songs/${list[song].fileName}`;
+    audio.setAttribute('src',route);
+}
+
 function selectSong(li){
     li.addEventListener('click', () => {
         song = li.dataset.num;
-        audio.setAttribute('src',`src/assets/songs/${list[song].file}`);
+        changeSong();
         audio.play();
         playButton.setAttribute("src","src/assets/icons/pause.svg");
     });
+}
+
+function nextSong(){
+    if(song < list.length -1){
+        song++;
+
+    }
 }
 
 
