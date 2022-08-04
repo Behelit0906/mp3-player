@@ -39,6 +39,8 @@ document.addEventListener('DOMContentLoaded', async function(){
     playListButton.addEventListener('click', () => {
         playListContainer.classList.toggle('display');
     });
+    endedSong();
+
 
     /*  loading playList */
     loadPlayList();
@@ -156,6 +158,12 @@ function loadSongData(){
     songName.textContent = list[song].title;
     songAutor.textContent = list[song].artist;
     cover.setAttribute('src', `src/assets/covers/${list[song].cover}`);
+}
+
+function endedSong(){
+    audio.addEventListener('ended', () => {
+        nextSong();
+    });
 }
 
 
