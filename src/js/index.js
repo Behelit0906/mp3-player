@@ -1,7 +1,6 @@
 var list = [];
 var listCopy = [];
 const audio = document.querySelector('audio');
-const jsmediatags = window.jsmediatags;
 const previousButton = document.querySelector('#previous');
 const playButton = document.querySelector('#play');
 const nextButton = document.querySelector('#next');
@@ -9,6 +8,9 @@ const playListContainer = document.querySelector('.play-list-container');
 const playList = document.querySelector('.playList');
 const playListButton = document.querySelector('.playlist-icon');
 const shuffleButton = document.querySelector('.shuffle');
+const songName = document.querySelector('.song-name');
+const songAutor = document.querySelector('.song-autor');
+const cover = document.querySelector('.cover');
 var song = 0;
 var isShuffle = false;
 
@@ -24,6 +26,15 @@ document.addEventListener('DOMContentLoaded', async function(){
     song = Math.floor(Math.random()*list.length);
 
 
+    // jsmediatags.read(`src/assets/songs/${list[song].fileName}`,{
+    //     onSuccess: function(tag){
+    //         console.log(tag);
+    //     },
+    //     onError: function(error){
+    //         console.log('Paila');
+    //     } 
+    // });
+
     /* PLAYLIST EVENT */
     playListButton.addEventListener('click', () => {
         playListContainer.classList.toggle('display');
@@ -35,6 +46,7 @@ document.addEventListener('DOMContentLoaded', async function(){
 
     /*  PREPARING SONG */
     audio.setAttribute('src',`src/assets/songs/${list[song].fileName}`);
+    loadSongData();
 
 
     /* CONTROL EVENTS */
@@ -89,6 +101,8 @@ function playEvent(){
 function changeSong(){
     route = `src/assets/songs/${list[song].fileName}`;
     audio.setAttribute('src',route);
+    playButton.setAttribute("src","src/assets/icons/pause.svg");
+    loadSongData();
 }
 
 function selectSong(li){
@@ -103,17 +117,24 @@ function selectSong(li){
 function nextSong(){
     if(song < list.length -1){
         song++;
-        changeSong();
-        audio.play();
     }
+    else{
+        song = 0;
+    }
+    changeSong();
+    audio.play();
 }
 
 function previousSong(){
     if(song > 0){
         song--;
-        changeSong();
-        audio.play();
     }
+    else{
+        song = list.length - 1;
+    }
+
+    changeSong();
+    audio.play();
 }
 
 function shuffle(){
@@ -128,11 +149,13 @@ function shuffle(){
         isShuffle = false;
     }
     loadPlayList();
-    song = 0;
+    song = -1;
 }
 
 function loadSongData(){
-    
+    songName.textContent = list[song].title;
+    songAutor.textContent = list[song].artist;
+    cover.setAttribute('src', `src/assets/covers/${list[song].cover}`);
 }
 
 
