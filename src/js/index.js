@@ -11,6 +11,8 @@ const shuffleButton = document.querySelector('.shuffle');
 const songName = document.querySelector('.song-name');
 const songAutor = document.querySelector('.song-autor');
 const cover = document.querySelector('.cover');
+const durationLabel = document.querySelector('.duration');
+const currentTime = document.querySelector('.current-time');
 var song = 0;
 var isShuffle = false;
 
@@ -26,20 +28,12 @@ document.addEventListener('DOMContentLoaded', async function(){
     song = Math.floor(Math.random()*list.length);
 
 
-    // jsmediatags.read(`src/assets/songs/${list[song].fileName}`,{
-    //     onSuccess: function(tag){
-    //         console.log(tag);
-    //     },
-    //     onError: function(error){
-    //         console.log('Paila');
-    //     } 
-    // });
-
     /* PLAYLIST EVENT */
     playListButton.addEventListener('click', () => {
         playListContainer.classList.toggle('display');
     });
     endedSong();
+    elapseTime();
 
 
     /*  loading playList */
@@ -49,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     /*  PREPARING SONG */
     audio.setAttribute('src',`src/assets/songs/${list[song].fileName}`);
     loadSongData();
+    setDuration();
 
 
     /* CONTROL EVENTS */
@@ -165,5 +160,62 @@ function endedSong(){
         nextSong();
     });
 }
+
+function setDuration(){
+    audio.addEventListener('loadeddata', () => {
+        let duration = audio.duration;
+        let min = '';
+        let seg = Math.floor(duration%60);
+        let temp = duration / 60;
+        if(temp <= 9){
+            min = `0${Math.floor(temp)}:` 
+        }
+        else{
+            min = `${Math.floor(temp)}:`;
+        }
+        if(seg <= 9){
+            seg = `0:${seg}`;
+        }
+        durationLabel.textContent = `${min}${seg}`
+    });
+}
+
+function elapseTime(){
+    let min = 0;
+    let minString = '00:';
+    let seg = 0;
+    let segString = '00';
+    let time = 0;
+    audio.addEventListener('timeupdate', () => {
+        time = Math.floor(audio.currentTime);
+        min = Math.floor(time / 60);
+        seg = time - (min*60);
+        if(seg == 60){
+            seg = 0;
+        }
+
+        switch(true){
+            case min < 10:
+                minString = `0${min}:`;
+                break;
+            case min > 9:
+                minString = `${min}:`;
+                break;
+        }
+
+        switch(true){
+            case seg < 10:
+                segString = `0${seg}`;
+                break;
+            case seg > 9:
+                segString = seg;
+        }
+
+        currentTime.textContent = `${minString}${segString}`;
+
+    });
+}
+
+
 
 

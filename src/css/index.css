@@ -85,6 +85,24 @@ body{
     width: 100%;
 }
 
+.current-time{
+    position: absolute;
+    color: #fff;
+    font-weight: bold;
+    bottom: 10px;
+    left: 25px;
+    text-shadow: 1px 1px #747392;
+}
+
+.duration{
+    position: absolute;
+    color: #fff;
+    font-weight: bold;
+    bottom: 10px;
+    right: 25px;
+    text-shadow: 1px 1px #747392;
+}
+
 
 
 /*  CONTROLS SECTION   */
